@@ -21,58 +21,6 @@ bench --site demo.erpnext.dev execute bd_demo.bd_demo.demo.make
 bench --site demo.erpnext.dev execute bd_demo.bd_demo.demo.simulate
 
 """
-def make2(domain='Manufacturing', days=10):
-	runs_for = frappe.flags.runs_for or days
-	frappe.flags.company = erpnext.get_default_company()
-	frappe.flags.mute_emails = True
-
-	if not frappe.flags.start_date:
-		# start date = 100 days back
-		frappe.flags.start_date = frappe.utils.add_days(frappe.utils.nowdate(),
-			-1 * runs_for)
-
-	current_date = frappe.utils.getdate(frappe.flags.start_date)
-
-	# continue?
-	demo_last_date = frappe.db.get_global('demo_last_date')
-	if demo_last_date:
-		current_date = frappe.utils.add_days(frappe.utils.getdate(demo_last_date), 1)
-
-	# run till today
-	if not runs_for:
-		runs_for = frappe.utils.date_diff(frappe.utils.nowdate(), current_date)
-		# runs_for = 100
-
-	fixed_asset.work()
-	for i in xrange(runs_for):
-		sys.stdout.write("\rSimulating {0}: Day {1}".format(
-			current_date.strftime("%Y-%m-%d"), i))
-		sys.stdout.flush()
-		frappe.flags.current_date = current_date
-		if current_date.weekday() in (5, 6):
-			current_date = frappe.utils.add_days(current_date, 1)
-			continue
-		try:
-			#vinh hr.work()
-			#purchase.work()
-			stock.work()
-			accounts.work()
-			projects.run_projects(current_date)
-			# run_messages()
-
-			if domain=='Manufacturing':
-				sales.work()
-				manufacturing.work()
-			elif domain=='Education':
-				user_education.work()
-
-		except:
-			frappe.db.set_global('demo_last_date', current_date)
-			raise
-		finally:
-			current_date = frappe.utils.add_days(current_date, 1)
-			frappe.db.commit()
-
 
 def make(domain='Manufacturing', days=10):
 	frappe.flags.domain = domain

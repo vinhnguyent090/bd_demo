@@ -49,7 +49,7 @@ def complete_setup(domain='Manufacturing'):
 	if not frappe.get_all('Company', limit=1):
 		setup_complete({
 			"full_name": "Test User",
-			"email": "test_demo@erpnext.com",
+			"email": "test_demo@bdoop.com",
 			"company_tagline": 'Awesome Products and Services',
 			"password": "demo",
 			"fy_start_date": "2015-01-01",
@@ -118,11 +118,11 @@ def setup_holiday_list():
 
 def setup_user():
 	frappe.db.sql('delete from tabUser where name not in ("Guest", "Administrator")')
-	for u in json.loads(open(frappe.get_app_path('erpnext', 'demo', 'data', 'user.json')).read()):
+	for u in json.loads(open(frappe.get_app_path('bd_demo', 'bd_demo', 'data', 'user.json')).read()):
 		user = frappe.new_doc("User")
 		user.update(u)
 		user.flags.no_welcome_mail = True
-		user.new_password = 'demo'
+		user.new_password = 'bd@123456'
 		user.insert()
 
 def setup_employee():
@@ -184,7 +184,7 @@ def setup_salary_structure(employees, salary_slip_based_on_timesheet=0):
 	return ss
 
 def setup_user_roles():
-	user = frappe.get_doc('User', 'demo@erpnext.com')
+	user = frappe.get_doc('User', 'demo@bdoop.com')
 	user.add_roles('HR User', 'HR Manager', 'Accounts User', 'Accounts Manager',
 		'Stock User', 'Stock Manager', 'Sales User', 'Sales Manager', 'Purchase User',
 		'Purchase Manager', 'Projects User', 'Manufacturing User', 'Manufacturing Manager',
@@ -192,52 +192,52 @@ def setup_user_roles():
 		'Nursing User', 'Patient')
 
 	if not frappe.db.get_global('demo_hr_user'):
-		user = frappe.get_doc('User', 'CharmaineGaudreau@example.com')
+		user = frappe.get_doc('User', 'CharmaineGaudreau@bdoop.com')
 		user.add_roles('HR User', 'HR Manager', 'Accounts User')
 		frappe.db.set_global('demo_hr_user', user.name)
 
 	if not frappe.db.get_global('demo_sales_user_1'):
-		user = frappe.get_doc('User', 'VakhitaRyzaev@example.com')
+		user = frappe.get_doc('User', 'VakhitaRyzaev@bdoop.com')
 		user.add_roles('Sales User')
 		frappe.db.set_global('demo_sales_user_1', user.name)
 
 	if not frappe.db.get_global('demo_sales_user_2'):
-		user = frappe.get_doc('User', 'GabrielleLoftus@example.com')
+		user = frappe.get_doc('User', 'GabrielleLoftus@bdoop.com')
 		user.add_roles('Sales User', 'Sales Manager', 'Accounts User')
 		frappe.db.set_global('demo_sales_user_2', user.name)
 
 	if not frappe.db.get_global('demo_purchase_user'):
-		user = frappe.get_doc('User', 'MichalSobczak@example.com')
+		user = frappe.get_doc('User', 'MichalSobczak@bdoop.com')
 		user.add_roles('Purchase User', 'Purchase Manager', 'Accounts User', 'Stock User')
 		frappe.db.set_global('demo_purchase_user', user.name)
 
 	if not frappe.db.get_global('demo_manufacturing_user'):
-		user = frappe.get_doc('User', 'NuranVerkleij@example.com')
+		user = frappe.get_doc('User', 'NuranVerkleij@bdoop.com')
 		user.add_roles('Manufacturing User', 'Stock User', 'Purchase User', 'Accounts User')
 		frappe.db.set_global('demo_manufacturing_user', user.name)
 
 	if not frappe.db.get_global('demo_stock_user'):
-		user = frappe.get_doc('User', 'HatsueKashiwagi@example.com')
+		user = frappe.get_doc('User', 'HatsueKashiwagi@bdoop.com')
 		user.add_roles('Manufacturing User', 'Stock User', 'Purchase User', 'Accounts User')
 		frappe.db.set_global('demo_stock_user', user.name)
 
 	if not frappe.db.get_global('demo_accounts_user'):
-		user = frappe.get_doc('User', 'LeonAbdulov@example.com')
+		user = frappe.get_doc('User', 'LeonAbdulov@bdoop.com')
 		user.add_roles('Accounts User', 'Accounts Manager', 'Sales User', 'Purchase User')
 		frappe.db.set_global('demo_accounts_user', user.name)
 
 	if not frappe.db.get_global('demo_projects_user'):
-		user = frappe.get_doc('User', 'panca@example.com')
+		user = frappe.get_doc('User', 'panca@bdoop.com')
 		user.add_roles('HR User', 'Projects User')
 		frappe.db.set_global('demo_projects_user', user.name)
 
 	if not frappe.db.get_global('demo_education_user'):
-		user = frappe.get_doc('User', 'aromn@example.com')
+		user = frappe.get_doc('User', 'aromn@bdoop.com')
 		user.add_roles('Academics User')
 		frappe.db.set_global('demo_education_user', user.name)
 
 	#Add Expense Approver
-	user = frappe.get_doc('User', 'WanMai@example.com')
+	user = frappe.get_doc('User', 'WanMai@bdoop.com')
 	user.add_roles('Expense Approver')
 
 def setup_leave_allocation():
@@ -314,7 +314,7 @@ def setup_mode_of_payment():
 
 def setup_account():
 	frappe.flags.in_import = True
-	data = json.loads(open(frappe.get_app_path('erpnext', 'demo', 'data',
+	data = json.loads(open(frappe.get_app_path('bd_demo', 'bd_demo', 'data',
 		'account.json')).read())
 	for d in data:
 		doc = frappe.new_doc('Account')

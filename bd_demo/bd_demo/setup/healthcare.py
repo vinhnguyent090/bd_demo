@@ -37,7 +37,7 @@ def make_patient():
 			patient.sex = d[1]['gender']
 			patient.blood_group = "A Positive"
 			patient.date_of_birth = datetime.datetime(1990, 3, 25)
-			patient.email_id = d[1]['patient_name'] + "_" + patient.date_of_birth.strftime('%m/%d/%Y') + "@example.com"
+			patient.email_id = d[1]['patient_name'] + "_" + patient.date_of_birth.strftime('%m/%d/%Y') + "@bdoop.com"
 			if count <5:
 				patient.insert()
 				frappe.db.commit()
@@ -155,7 +155,7 @@ def random_date(start,l):
 
 def import_drug():
 	frappe.flags.in_import = True
-	data = json.loads(open(frappe.get_app_path('erpnext', 'demo', 'data', 'drug_list.json')).read())
+	data = json.loads(open(frappe.get_app_path('bd_demo', 'bd_demo', 'data', 'drug_list.json')).read())
 	for d in data:
 		doc = frappe.new_doc("Item")
 		doc.update(d)
@@ -163,4 +163,4 @@ def import_drug():
 	frappe.flags.in_import = False
 
 def get_json_path(doctype):
-		return frappe.get_app_path('erpnext', 'demo', 'data', frappe.scrub(doctype) + '.json')
+		return frappe.get_app_path('bd_demo', 'bd_demo', 'data', frappe.scrub(doctype) + '.json')

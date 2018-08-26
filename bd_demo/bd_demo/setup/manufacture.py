@@ -45,7 +45,7 @@ def show_item_groups_in_website():
 	products.save()
 
 def setup_asset():
-	assets = json.loads(open(frappe.get_app_path('erpnext', 'demo', 'data', 'asset.json')).read())
+	assets = json.loads(open(frappe.get_app_path('bd_demo', 'bd_demo', 'data', 'asset.json')).read())
 	for d in assets:
 		asset = frappe.new_doc('Asset')
 		asset.update(d)
@@ -59,7 +59,7 @@ def setup_asset():
 		asset.submit()
 
 def setup_item():
-	items = json.loads(open(frappe.get_app_path('erpnext', 'demo', 'data', 'item.json')).read())
+	items = json.loads(open(frappe.get_app_path('bd_demo', 'bd_demo', 'data', 'item.json')).read())
 	for i in items:
 		item = frappe.new_doc('Item')
 		item.update(i)

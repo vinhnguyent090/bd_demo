@@ -75,7 +75,7 @@ def make_student_applicants():
 			else:
 				student_applicant.middle_name = random.choice(female_names)
 			student_applicant.student_email_id = d.get('first_name') + "_" + \
-				student_applicant.middle_name + "_" + d.get('last_name') + "@example.com"
+				student_applicant.middle_name + "_" + d.get('last_name') + "@bdoop.com"
 			if count <5:
 				student_applicant.insert()
 				frappe.db.commit()
