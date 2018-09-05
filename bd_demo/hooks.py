@@ -11,6 +11,13 @@ app_color = "grey"
 app_email = "vinhbk2000@gmail.com"
 app_license = "MIT"
 
+website_context = {
+	"favicon": 	"/assets/bdtheme/images/bp-ico-32.png",
+	"splash_image": "/assets/bdtheme/images/logo_bdoop.png"
+}
+
+email_brand_image = "assets/bdtheme/images/logo_bdoop.png"
+
 # Includes in <head>
 # ------------------
 

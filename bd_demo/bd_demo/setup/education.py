@@ -31,7 +31,7 @@ def make_masters():
 	frappe.db.commit()
 
 def setup_item():
-	items = json.loads(open(frappe.get_app_path('erpnext', 'demo', 'data', 'item_education.json')).read())
+	items = json.loads(open(frappe.get_app_path('bd_demo', 'bd_demo', 'data', 'item_education.json')).read())
 	for i in items:
 		item = frappe.new_doc('Item')
 		item.update(i)
@@ -161,7 +161,7 @@ def make_assessment_groups():
 
 
 def get_json_path(doctype):
-		return frappe.get_app_path('erpnext', 'demo', 'data', frappe.scrub(doctype) + '.json')
+		return frappe.get_app_path('bd_demo', 'bd_demo', 'data', frappe.scrub(doctype) + '.json')
 		
 def weighted_choice(weights):
 	totals = []
